@@ -1,3 +1,20 @@
+# PointNet++ Model for Architectural Semantic Segmentation of Buildings
+
+This repo extends the PointNet++ model for semantic segmentation of buildings. The model is trained on a portion of the [2022 Vancouver LiDAR Dataset](https://opendata.vancouver.ca/explore/dataset/lidar-2022/information/) whereby the points are filtered by their proximity to a building (points that are within 5m of a building) as a pre-processing step. This implementation is developed as a part of the [LiDAR-DenseSeg](github.com/ashtanmistal/LiDAR-DenseSeg) project.
+
+Pre-trained weights are available in the root directory of this repo and also under the `checkpoints/` directory. 
+
+On the UBC dataset, the model achieves an accuracy of 94.1% and a mean IoU of 0.89%. 
+
+
+## Planned Improvements
+- Further hyperparameter tuning and evaluation on a larger dataset is planned (extrapolation to a larger area of the Vancouver LiDAR dataset).
+- Randomization of building coordinates during training process to improve generalization to unseen buildings and other datasets.
+
+The following is the original README for the PointNet++ model implementation in PyTorch.
+
+___
+
 # Pytorch Implementation of PointNet and PointNet++ 
 
 This repo is implementation for [PointNet](http://openaccess.thecvf.com/content_cvpr_2017/papers/Qi_PointNet_Deep_Learning_CVPR_2017_paper.pdf) and [PointNet++](http://papers.nips.cc/paper/7095-pointnet-deep-hierarchical-feature-learning-on-point-sets-in-a-metric-space.pdf) in pytorch.
@@ -112,26 +129,6 @@ python train_semseg.py --model pointnet2_sem_seg --test_area 5 --log_dir pointne
 python test_semseg.py --log_dir pointnet2_sem_seg --test_area 5 --visual
 ```
 Visualization results will save in `log/sem_seg/pointnet2_sem_seg/visual/` and you can visualize these .obj file by [MeshLab](http://www.meshlab.net/).
-
-### Performance
-|Model  | Overall Acc |Class avg IoU | Checkpoint 
-|--|--|--|--|
-| PointNet (Pytorch) | 78.9 | 43.7| [40.7MB](log/sem_seg/pointnet_sem_seg) |
-| PointNet2_ssg (Pytorch) | **83.0** | **53.5**| [11.2MB](log/sem_seg/pointnet2_sem_seg) |
-
-## Visualization
-### Using show3d_balls.py
-```
-## build C++ code for visualization
-cd visualizer
-bash build.sh 
-## run one example 
-python show3d_balls.py
-```
-![](/visualizer/pic.png)
-### Using MeshLab
-![](/visualizer/pic2.png)
-
 
 ## Reference By
 [halimacc/pointnet3](https://github.com/halimacc/pointnet3)<br>
